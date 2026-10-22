@@ -342,6 +342,7 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
     uniform float uImageRatio;
     uniform float uAnchorTop;
     uniform float uScroll;
+    uniform float uDistort;
     varying vec2 vUv;
 
     void main() {
@@ -356,15 +357,15 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
       uv.y = mix(uv.y, topY, uAnchorTop);
 
       // scroll bend — wave along x driven by scroll velocity
-      uv.y += sin(uv.x * 3.14159) * uVelocity * 0.035;
+      uv.y += sin(uv.x * 3.14159) * uVelocity * 0.035 * uDistort;
 
       // hover ripple
       float d = distance(vUv, uHover);
-      float ripple = sin(d * 24.0 - uTime * 4.0) * exp(-d * 4.5) * uHoverState * 0.025;
+      float ripple = sin(d * 24.0 - uTime * 4.0) * exp(-d * 4.5) * uHoverState * 0.025 * uDistort;
       uv += normalize(vUv - uHover + 0.0001) * ripple;
 
       // chromatic shift scaled by motion
-      float shift = uVelocity * 0.012 + uHoverState * 0.006;
+      float shift = (uVelocity * 0.012 + uHoverState * 0.006) * uDistort;
       float r = texture2D(uTexture, uv + vec2(shift, 0.0)).r;
       float g = texture2D(uTexture, uv).g;
       float b = texture2D(uTexture, uv - vec2(shift, 0.0)).b;
@@ -414,6 +415,8 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
         uImageRatio: { value: 1 },
         uAnchorTop: { value: img.hasAttribute('data-preview') ? 1 : 0 },
         uScroll: { value: 0 },
+        // live-site screenshots stay readable: keep only a hint of the effect
+        uDistort: { value: img.hasAttribute('data-preview') ? 0.2 : 1 },
       };
 
       const loader = new THREE.TextureLoader();
