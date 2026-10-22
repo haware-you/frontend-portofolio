@@ -66,6 +66,7 @@ Neighbouring sections use different backgrounds, so each one reads as a new chap
 - **Never invent proof.** No made-up client logos, "trusted by" grids, review stars, testimonials, or numbers like "1,000 companies".
 - **No prices, durations or revision counts** unless Hawaree has confirmed them. The FAQ answers say "it depends" and promise a price before work starts.
 - **Spine sentence:** a customer opens a phone, looks for one thing, and either messages you or leaves. Every section should serve that moment; if it doesn't, cut it or rewrite it.
+- **Job title: "UI designer & front-end developer".** Use it in the page title, link previews and the About intro. Don't use "UI/UX" until at least one case study shows real user research or testing (who used it, what they struggled with, what changed).
 - **Only claim services that are offered.** Don't claim "brand identity" work unless Hawaree actually does it. Facts on the page so far: clients in Jakarta and Depok, design and code by Hawaree.
 
 ## WhatsApp CTA

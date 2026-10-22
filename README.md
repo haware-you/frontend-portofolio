@@ -1,4 +1,4 @@
-# HAWAREE | Web Design & Front-end Development
+# HAWAREE | UI Designer & Front-end Developer
 
 Portfolio of **Abdullah Shidqi Hawari** (Hawaree): websites designed and built by hand.
 
