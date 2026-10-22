@@ -352,6 +352,11 @@ section { position: relative; }
   font-size: clamp(0.95rem, 1.3vw, 1.2rem);
   opacity: 0.85;
 }
+.panel__link {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1em;
+}
+.panel__link:hover { color: var(--red); }
 
 /* ---------- Services ---------- */
 .services {
