@@ -1,4 +1,4 @@
-# HAWAREE | Web Design & Front-end Development
+# HAWAREE | UI Designer & Front-end Developer
 
 Portfolio of **Abdullah Shidqi Hawari** (Hawaree): websites designed and built by hand.
 
@@ -34,7 +34,3 @@ Any static server works:
 ```bash
 npx serve .
 ```
-
-## Credits
-
-Photography for the in-progress panel from [Unsplash](https://unsplash.com/), used under the Unsplash License.

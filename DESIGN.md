@@ -10,10 +10,10 @@ All colours live in the `:root` block of `styles.css`. Don't add colours anywher
 
 | Token | Hex | Used for |
 |---|---|---|
-| `--red` | `#e6380f` | Accent: preloader, Services background, FAQ giant word, link underlines, cursor, focus outlines |
-| `--red-deep` | `#c52e0a` | Defined but not used yet. Use it for a darker red (pressed states) before adding a new one. |
+| `--red` | `#e6380f` | Accent and big type only: preloader, hero title, LET'S TALK, FAQ giant word, cursor, focus outlines. Cream on this red is 3.7:1, so never put small text on it. |
+| `--red-deep` | `#c52e0a` | Any red surface or red text that holds small text: Process section, red Works panels, menu overlay, WhatsApp buttons, Process hover text. Cream on it is 4.8:1 (passes WCAG AA). |
 | `--cream` | `#f3eee6` | Light background (hero, contact), text on dark or red |
-| `--cream-dim` | `#e9e2d6` | Defined but not used yet. Use it for a secondary light surface before adding a new one. |
+| `--cream-dim` | `#e9e2d6` | The WhatsApp message preview bubble in Contact |
 | `--ink` | `#0d0c0b` | Dark background (stats, works, FAQ), body text on light |
 | (literal) | `#faf7f1` | About background, a step lighter than cream |
 
@@ -25,8 +25,8 @@ Decisions already made:
 
 | Token | Font | Role |
 |---|---|---|
-| `--font-display` | Anton | Headings, panel titles, FAQ questions, small uppercase labels |
-| `--font-mega` | Six Caps | Giant words (SERVICES, FAQ), stats rows, step numbers |
+| `--font-display` | Anton | Headings, panel titles, buttons, small uppercase labels. FAQ questions use it in sentence case for easier scanning. |
+| `--font-mega` | Six Caps | Giant words (PROCESS, FAQ), stats rows, step numbers |
 | `--font-serif` | Playfair Display (400/500, roman and italic) | Body text, intros, captions, italics |
 
 - Headings are uppercase. Body text is sentence case.
@@ -39,17 +39,18 @@ Decisions already made:
 | # | Section | Background | Notes |
 |---|---|---|---|
 | 01 | Hero | cream | Giant red HAWAREE, short intro |
-| 02 | About | `#faf7f1` | Two columns: heading left, intro and paragraph right. No photo. |
+| 02 | About | `#faf7f1` | Two columns: the customer's moment as the heading, who Hawaree is and what he does on the right. No photo. |
 | 02 | Stats | ink | Three Six Caps rows; the middle one is outlined |
 | 03 | Works | ink + per-panel colour | Horizontal pinned scroll, one panel per project |
-| 04 | Services | red | Four steps: Talk, Design, Build, Launch |
-| 05 | FAQ | ink | Native `<details>` accordion |
-| 06 | Contact | cream | WhatsApp CTA, Instagram link, footer |
+| 04 | Process | red-deep | Four steps: Talk, Design, Build, Launch. Called Process, not Services, because it describes how a project runs. |
+| 05 | FAQ | ink | Two columns: "Ask on WhatsApp" prompt left, native `<details>` accordion right |
+| 06 | Contact | cream | Filled WhatsApp button, a preview of the pre-filled message, Instagram link, footer |
 
 Neighbouring sections use different backgrounds, so each one reads as a new chapter. If you add a section, update the menu, the `data-chapter` numbers and the `/06` in the side rail.
 
 ## Works panels
 
+- The last panel is an invitation, not a project: "Next: your site" with a WhatsApp button. No stock images.
 - Panel colours cycle **red, cream, ink, red**. Two panels next to each other never share a colour.
 - Each live project gets a browser frame with a **full-page screenshot**. It pans top to bottom on hover or keyboard focus, and on phones when the panel reaches the middle of the screen.
 - **Frame width:** up to 1.3x the original, `max(min(50vw, 820px), min(65vw, (100vh - 380px) * 1.6, 1066px))`.
@@ -64,11 +65,19 @@ Neighbouring sections use different backgrounds, so each one reads as a new chap
 - **English on the site. Indonesian in the WhatsApp message template,** because that's what clients type in.
 - **Never invent proof.** No made-up client logos, "trusted by" grids, review stars, testimonials, or numbers like "1,000 companies".
 - **No prices, durations or revision counts** unless Hawaree has confirmed them. The FAQ answers say "it depends" and promise a price before work starts.
-- **Only claim services that are offered.** The About text says "web designer and front-end developer". Add "brand identity" only if Hawaree actually does it.
+- **Spine sentence:** a customer opens a phone, looks for one thing, and either messages you or leaves. Every section should serve that moment; if it doesn't, cut it or rewrite it.
+- **Job title: "UI designer & front-end developer".** Use it in the page title, link previews and the About intro. Don't use "UI/UX" until at least one case study shows real user research or testing (who used it, what they struggled with, what changed).
+- **Only claim services that are offered.** Don't claim "brand identity" work unless Hawaree actually does it. Facts on the page so far: clients in Jakarta and Depok, design and code by Hawaree.
 
 ## WhatsApp CTA
 
-The "Chat on WhatsApp" link opens `wa.me/6285314851480` with this message pre-filled:
+There are four WhatsApp links, all with the same URL. If you change the message, update all four:
+1. the floating "Chat on WhatsApp" button (bottom right on every section; hidden while Contact is on screen)
+2. the button on the last Works panel ("Next: your site")
+3. "Ask on WhatsApp" in the FAQ
+4. the main button in Contact, whose message preview next to it must match the text below
+
+Each one opens `wa.me/6285314851480` with this message pre-filled:
 
 ```
 Halo Hawaree, saya mau ngobrol soal website.
