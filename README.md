@@ -34,7 +34,3 @@ Any static server works:
 ```bash
 npx serve .
 ```
-
-## Credits
-
-Photography for the in-progress panel from [Unsplash](https://unsplash.com/), used under the Unsplash License.

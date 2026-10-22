@@ -54,7 +54,7 @@
       <li><a href="#hero" data-menu-link><span class="menu__idx">01</span><span class="menu__word">Intro</span></a></li>
       <li><a href="#about" data-menu-link><span class="menu__idx">02</span><span class="menu__word">About</span></a></li>
       <li><a href="#works" data-menu-link><span class="menu__idx">03</span><span class="menu__word">Works</span></a></li>
-      <li><a href="#services" data-menu-link><span class="menu__idx">04</span><span class="menu__word">Services</span></a></li>
+      <li><a href="#services" data-menu-link><span class="menu__idx">04</span><span class="menu__word">Process</span></a></li>
       <li><a href="#faq" data-menu-link><span class="menu__idx">05</span><span class="menu__word">FAQ</span></a></li>
       <li><a href="#contact" data-menu-link><span class="menu__idx">06</span><span class="menu__word">Contact</span></a></li>
     </ul>
@@ -64,6 +64,9 @@
     </div>
   </nav>
 
+  <!-- Persistent WhatsApp button (hidden while Contact is on screen) -->
+  <a class="wa-float" id="waFloat" href="https://wa.me/6285314851480?text=Halo%20Hawaree%2C%20saya%20mau%20ngobrol%20soal%20website.%0A%0ANama%20usaha%3A%0AJenis%20usaha%3A%0AWebsite%20untuk%20apa%3F%20%28menu%20%26%20order%20%2F%20profil%20usaha%20%2F%20sekolah%20%2F%20lainnya%29%3A%0ASudah%20punya%20logo%20%26%20foto%3F%20%28sudah%20%2F%20belum%29%3A%0ATarget%20selesai%3A%0AKisaran%20budget%20%28opsional%29%3A" target="_blank" rel="noopener" data-cursor="link">Chat on WhatsApp</a>
+
   <div id="smooth-wrapper">
     <div id="smooth-content">
 
@@ -71,7 +74,7 @@
       <section class="hero" id="hero" data-chapter="01">
         <h1 class="hero__title" data-split-chars>HAWAREE</h1>
         <div class="hero__intro">
-          <p class="hero__lede" data-split-lines>I design websites and write the code for them myself. Lately that means a kebab bar's menu and a primary school's admissions site.</p>
+          <p class="hero__lede" data-split-lines>I design websites and write the code for them myself. Lately that means a kebab bar's menu, a primary school's admissions site and a matcha shop's homepage.</p>
           <div class="hero__meta">
             <span>PORTFOLIO 2026</span>
             <span>OPEN TO NEW PROJECTS</span>
@@ -87,10 +90,9 @@
 
       <!-- ============ ABOUT ============ -->
       <section class="about" id="about" data-chapter="02">
-        <h2 class="about__title" data-split-lines>Crafting meaningful websites &amp; intuitive experiences</h2>
+        <h2 class="about__title" data-split-lines>Your customer opens a phone, looks for one thing, then orders or leaves.</h2>
         <div class="about__body">
-          <p class="about__lead">Hey, I'm Abdullah, a web designer and front-end developer passionate about creating visually compelling and user-friendly websites.</p>
-          <p class="about__text">With a keen eye for aesthetics and a deep understanding of how customers use their phones, I design websites that not only look great but also bring in messages and orders. Whether it's a menu with WhatsApp ordering, a school profile or a landing page, I blend strategy, creativity and functionality to bring ideas to life. Let's collaborate and make something extraordinary.</p>
+          <p class="about__lead">I'm Abdullah. I build websites for small businesses in Jakarta and Depok, and I design each one around that moment: the menu, the prices, the admission details. Then I write the code myself, so nothing is a template.</p>
         </div>
       </section>
 
@@ -163,15 +165,13 @@
             </div>
           </article>
 
-          <!-- Ongoing work: stock image, no link, labelled as in progress. -->
-          <article class="panel panel--red panel--last">
+          <!-- Last panel: an invitation, no image -->
+          <article class="panel panel--red panel--last panel--cta">
             <span class="panel__num" aria-hidden="true">04</span>
-            <div class="panel__media">
-              <img class="gl-image" src="img/1557672172-298e090bd0f1.jpg" alt="" crossorigin="anonymous" />
-            </div>
             <div class="panel__info">
-              <h3 class="panel__title">IN PROGRESS</h3>
+              <h3 class="panel__title">NEXT: YOUR SITE</h3>
               <p class="panel__cat"><em>I'm designing and building a few more sites right now.</em></p>
+              <a class="btn-wa" href="https://wa.me/6285314851480?text=Halo%20Hawaree%2C%20saya%20mau%20ngobrol%20soal%20website.%0A%0ANama%20usaha%3A%0AJenis%20usaha%3A%0AWebsite%20untuk%20apa%3F%20%28menu%20%26%20order%20%2F%20profil%20usaha%20%2F%20sekolah%20%2F%20lainnya%29%3A%0ASudah%20punya%20logo%20%26%20foto%3F%20%28sudah%20%2F%20belum%29%3A%0ATarget%20selesai%3A%0AKisaran%20budget%20%28opsional%29%3A" target="_blank" rel="noopener" data-cursor="link">Chat on WhatsApp <span aria-hidden="true">↗</span></a>
             </div>
           </article>
 
@@ -180,7 +180,7 @@
 
       <!-- ============ SERVICES ============ -->
       <section class="services" id="services" data-chapter="04">
-        <h2 class="services__giant" data-split-chars aria-hidden="true">SERVICES</h2>
+        <h2 class="services__giant" data-split-chars aria-hidden="true">PROCESS</h2>
         <p class="services__lede"><em>How a project runs, from your first message to launch.</em></p>
         <ol class="services__list">
           <li class="services__item">
@@ -221,7 +221,12 @@
       <!-- ============ FAQ ============ -->
       <section class="faq" id="faq" data-chapter="05">
         <h2 class="faq__giant" data-split-chars aria-hidden="true">FAQ</h2>
-        <h2 class="faq__title">Questions clients ask</h2>
+        <div class="faq__grid">
+        <div class="faq__side">
+          <h2 class="faq__title">Questions clients ask</h2>
+          <p class="faq__ask">Don't see your question? Ask me on WhatsApp.</p>
+          <a class="btn-wa btn-wa--small" href="https://wa.me/6285314851480?text=Halo%20Hawaree%2C%20saya%20mau%20ngobrol%20soal%20website.%0A%0ANama%20usaha%3A%0AJenis%20usaha%3A%0AWebsite%20untuk%20apa%3F%20%28menu%20%26%20order%20%2F%20profil%20usaha%20%2F%20sekolah%20%2F%20lainnya%29%3A%0ASudah%20punya%20logo%20%26%20foto%3F%20%28sudah%20%2F%20belum%29%3A%0ATarget%20selesai%3A%0AKisaran%20budget%20%28opsional%29%3A" target="_blank" rel="noopener" data-cursor="link">Ask on WhatsApp <span aria-hidden="true">↗</span></a>
+        </div>
         <div class="faq__list">
           <details class="faq__item">
             <summary class="faq__q">How much does a website cost?</summary>
@@ -252,6 +257,7 @@
             <p class="faq__a">Yes. On the KOBAB site, customers pick items from the menu and the order is sent to the shop on WhatsApp. I can set up the same for your business.</p>
           </details>
         </div>
+        </div>
       </section>
 
       <!-- ============ CONTACT ============ -->
@@ -259,9 +265,22 @@
         <p class="contact__pre"><em>Have a website to build?</em></p>
         <h2 class="contact__title" data-split-chars>LET'S TALK</h2>
         <div class="contact__links">
-          <a class="contact__mail" href="https://wa.me/6285314851480?text=Halo%20Hawaree%2C%20saya%20mau%20ngobrol%20soal%20website.%0A%0ANama%20usaha%3A%0AJenis%20usaha%3A%0AWebsite%20untuk%20apa%3F%20%28menu%20%26%20order%20%2F%20profil%20usaha%20%2F%20sekolah%20%2F%20lainnya%29%3A%0ASudah%20punya%20logo%20%26%20foto%3F%20%28sudah%20%2F%20belum%29%3A%0ATarget%20selesai%3A%0AKisaran%20budget%20%28opsional%29%3A" target="_blank" rel="noopener" data-cursor="link">Chat on WhatsApp <span aria-hidden="true">↗</span></a>
-          <p class="contact__hint">WhatsApp opens with a few short questions about your business. Fill in what you know and press send.</p>
-          <a class="contact__alt" href="https://www.instagram.com/hawaree_yu/" target="_blank" rel="noopener" data-cursor="link">or DM @hawaree_yu on Instagram</a>
+          <div class="contact__actions">
+            <a class="btn-wa btn-wa--large" href="https://wa.me/6285314851480?text=Halo%20Hawaree%2C%20saya%20mau%20ngobrol%20soal%20website.%0A%0ANama%20usaha%3A%0AJenis%20usaha%3A%0AWebsite%20untuk%20apa%3F%20%28menu%20%26%20order%20%2F%20profil%20usaha%20%2F%20sekolah%20%2F%20lainnya%29%3A%0ASudah%20punya%20logo%20%26%20foto%3F%20%28sudah%20%2F%20belum%29%3A%0ATarget%20selesai%3A%0AKisaran%20budget%20%28opsional%29%3A" target="_blank" rel="noopener" data-cursor="link">Chat on WhatsApp <span aria-hidden="true">↗</span></a>
+            <p class="contact__hint">WhatsApp opens with the message on the right already written. Fill in what you know and press send.</p>
+            <a class="contact__alt" href="https://www.instagram.com/hawaree_yu/" target="_blank" rel="noopener" data-cursor="link">or DM @hawaree_yu on Instagram</a>
+          </div>
+          <figure class="wa-preview">
+            <figcaption class="wa-preview__label">Your message</figcaption>
+            <p class="wa-preview__bubble">Halo Hawaree, saya mau ngobrol soal website.
+
+Nama usaha:
+Jenis usaha:
+Website untuk apa? (menu &amp; order / profil usaha / sekolah / lainnya):
+Sudah punya logo &amp; foto? (sudah / belum):
+Target selesai:
+Kisaran budget (opsional):</p>
+          </figure>
         </div>
         <footer class="contact__foot">
           <span>© 2026 HAWAREE</span>

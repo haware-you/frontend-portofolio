@@ -135,7 +135,7 @@ ul { list-style: none; }
 /* ---------- Menu overlay ---------- */
 .menu {
   position: fixed; inset: 0; z-index: 160;
-  background: var(--red);
+  background: var(--red-deep);
   display: flex; flex-direction: column; justify-content: center;
   padding: 0 8vw;
   clip-path: inset(0 0 100% 0);
@@ -219,7 +219,7 @@ section { position: relative; }
   position: absolute; right: 1.4rem; bottom: 1.4rem;
   font-family: var(--font-serif); font-style: italic;
   font-size: clamp(1.1rem, 1.8vw, 1.6rem);
-  color: var(--red);
+  color: var(--red-deep);
 }
 
 /* ---------- About ---------- */
@@ -246,12 +246,6 @@ section { position: relative; }
   font-size: clamp(1.25rem, 1.9vw, 1.75rem);
   line-height: 1.3;
   color: var(--ink);
-}
-.about__text {
-  margin-top: 1.6rem;
-  font-size: clamp(1rem, 1.2vw, 1.15rem);
-  line-height: 1.65;
-  color: rgba(13, 12, 11, 0.62);
 }
 
 /* ---------- Stats ---------- */
@@ -300,7 +294,8 @@ section { position: relative; }
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
 }
-.panel--red   { background: var(--red);   color: var(--cream); }
+/* --red-deep behind any small text: cream on --red is 3.7:1, on --red-deep 4.8:1 */
+.panel--red   { background: var(--red-deep); color: var(--cream); }
 .panel--cream { background: var(--cream); color: var(--ink); }
 .panel--ink   { background: var(--ink);   color: var(--cream); }
 
@@ -339,6 +334,16 @@ section { position: relative; }
   font-size: clamp(0.95rem, 1.3vw, 1.2rem);
   opacity: 0.85;
 }
+.panel--red .panel__cat,
+.panel--red .panel__role { opacity: 1; }
+
+/* Last panel: an invitation instead of a project */
+.panel--cta .panel__info {
+  position: static;
+  max-width: min(90%, 52rem);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.4rem;
+}
+.panel--cta .btn-wa { margin-top: 1.6rem; }
 
 /* Live-site panels: browser frame around a full-page screenshot */
 .panel__media--site {
@@ -411,7 +416,7 @@ section { position: relative; }
 
 /* ---------- Services ---------- */
 .services {
-  background: var(--red); color: var(--cream);
+  background: var(--red-deep); color: var(--cream);
   padding: 0 4vw 14vh;
   overflow: hidden;
 }
@@ -440,7 +445,7 @@ section { position: relative; }
 }
 .services__item:last-child { border-bottom: 1px solid rgba(243, 238, 230, 0.35); }
 .services__item:hover {
-  background: var(--cream); color: var(--red);
+  background: var(--cream); color: var(--red-deep);
   padding-left: 1.4rem;
 }
 .services__idx { font-family: var(--font-mega); font-size: 1.6rem; opacity: 0.75; }
@@ -456,9 +461,49 @@ section { position: relative; }
   max-width: 54ch;
   font-size: clamp(1rem, 1.15vw, 1.12rem);
   line-height: 1.55;
-  opacity: 0.92;
 }
-.services__note { font-size: 0.95rem; opacity: 0.85; }
+.services__note { font-size: 1rem; }
+
+/* ---------- WhatsApp buttons ---------- */
+.btn-wa {
+  display: inline-flex; align-items: center; gap: 0.6em;
+  padding: 0.95em 1.5em;
+  border-radius: 6px;
+  background: var(--cream); color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+}
+.btn-wa:hover { background: var(--ink); color: var(--cream); }
+.btn-wa:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+.btn-wa--small { font-size: 0.95rem; padding: 0.8em 1.2em; }
+.btn-wa--large {
+  background: var(--red-deep); color: var(--cream);
+  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+}
+.btn-wa--large:hover { background: var(--ink); }
+.btn-wa--large:focus-visible { outline-color: var(--red-deep); }
+.faq .btn-wa--small { background: var(--red-deep); color: var(--cream); }
+.faq .btn-wa--small:hover { background: var(--cream); color: var(--ink); }
+
+/* Persistent button, bottom right; script.js hides it over Contact */
+.wa-float {
+  position: fixed; z-index: 150;
+  right: max(18px, env(safe-area-inset-right, 0px));
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  padding: 0.85em 1.2em;
+  border-radius: 999px;
+  /* ink with a cream ring: readable on red, cream and ink sections alike */
+  background: var(--ink); color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+  box-shadow: 0 0 0 1px rgba(243, 238, 230, 0.45), 0 12px 30px -10px rgba(13, 12, 11, 0.55);
+  transition: opacity 0.35s, transform 0.35s, background 0.3s;
+}
+.wa-float:hover { background: var(--red-deep); }
+.wa-float:focus-visible { outline: 3px solid var(--red-deep); outline-offset: 3px; }
+.wa-float.is-hidden { opacity: 0; transform: translateY(12px); pointer-events: none; }
 
 /* ---------- FAQ ---------- */
 .faq {
@@ -474,12 +519,20 @@ section { position: relative; }
   color: var(--red);
   user-select: none;
 }
+.faq__grid {
+  margin-top: 4vh;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
+  gap: 4vw;
+  align-items: start;
+}
+.faq__side { display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+.faq__ask { font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.5; max-width: 26ch; }
 .faq__title {
-  margin-top: 2vh;
   font-family: var(--font-serif); font-style: italic; font-weight: 400;
   font-size: clamp(1.1rem, 1.6vw, 1.5rem);
 }
-.faq__list { margin-top: 4vh; max-width: 62rem; }
+.faq__list { min-width: 0; }
 .faq__item { border-top: 1px solid rgba(243, 238, 230, 0.25); }
 .faq__item:last-child { border-bottom: 1px solid rgba(243, 238, 230, 0.25); }
 .faq__q {
@@ -487,9 +540,9 @@ section { position: relative; }
   display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem;
   padding: 1.4rem 0.2rem;
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.4vw, 2rem);
-  text-transform: uppercase;
-  line-height: 1.1;
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
   cursor: pointer;
   transition: color 0.3s;
 }
@@ -535,22 +588,32 @@ section { position: relative; }
 }
 .contact__links {
   margin-top: 4.5vh;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 1.1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4vw;
+  align-items: start;
 }
-.contact__mail {
-  align-self: flex-start;
-  font-family: var(--font-serif); font-style: italic;
-  font-size: clamp(1.4rem, 3vw, 2.6rem);
-  border-bottom: 2px solid var(--red);
-  padding-bottom: 0.15em;
-  transition: color 0.3s, border-color 0.3s;
+.contact__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+.wa-preview { max-width: 30rem; }
+.wa-preview__label {
+  font-family: var(--font-display);
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(13, 12, 11, 0.7);
+  margin-bottom: 0.6rem;
 }
-.contact__mail:hover { color: var(--red); }
+.wa-preview__bubble {
+  white-space: pre-line;
+  padding: 1.1rem 1.3rem;
+  border-radius: 14px 14px 4px 14px;
+  background: var(--cream-dim);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.55;
+}
 .contact__hint {
-  max-width: 44ch;
-  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  max-width: 40ch;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
   line-height: 1.5;
-  opacity: 0.65;
+  color: rgba(13, 12, 11, 0.82);
 }
 .contact__alt {
   font-size: clamp(0.95rem, 1.3vw, 1.15rem);
@@ -558,7 +621,6 @@ section { position: relative; }
   transition: color 0.3s, opacity 0.3s;
 }
 .contact__alt:hover { color: var(--red); opacity: 1; }
-.contact__mail:focus-visible,
 .contact__alt:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
 .contact__foot {
   margin-top: auto;
@@ -628,6 +690,8 @@ section { position: relative; }
   .services__item { grid-template-columns: 2.6rem minmax(0, 1fr); }
   .services__note { grid-column: 2; }
   .faq__giant { font-size: 40vw; }
+  .faq__grid, .contact__links { grid-template-columns: minmax(0, 1fr); gap: 2.4rem; }
+  .wa-float { font-size: 0.78rem; }
 
   .contact__title { font-size: 22vw; white-space: normal; }
   .contact__foot { flex-direction: column; gap: 0.6rem; text-align: center; }

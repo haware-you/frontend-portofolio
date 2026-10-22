@@ -168,6 +168,7 @@ const worksTween = gsap.to(track, {
 /* Panel inner parallax driven by the horizontal tween */
 document.querySelectorAll('.panel').forEach((panel) => {
   const media = panel.querySelector('.panel__media');
+  if (!media) return; // the closing invitation panel has no image
 
   gsap.fromTo(
     media,
@@ -557,4 +558,14 @@ window.addEventListener('resize', () => {
 /* FAQ answers change the page height when opened or closed */
 document.querySelectorAll('.faq__item').forEach((item) => {
   item.addEventListener('toggle', () => ScrollTrigger.refresh());
+});
+
+/* Floating WhatsApp button: hidden while Contact (which has its own
+   button) is on screen */
+const waFloat = document.getElementById('waFloat');
+ScrollTrigger.create({
+  trigger: '#contact',
+  start: 'top 80%',
+  end: 'bottom top',
+  onToggle: (self) => waFloat.classList.toggle('is-hidden', self.isActive),
 });
