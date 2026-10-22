@@ -1,18 +1,24 @@
-# OBLIQUE — Editorial Web Design
+# HAWAREE | Web Design & Front-end Development
 
-A concept landing page for **OBLIQUE**, a fictional independent design studio. The studio, its projects and its numbers are invented; this is a design and front-end craft piece, not a real client.
-
-Designed and built by **Abdullah Shidqi Hawari**.
+Portfolio of **Abdullah Shidqi Hawari** (Hawaree): websites designed and built by hand.
 
 ## What's inside
 
 - **Editorial type system:** Anton, Six Caps and Playfair Display on a vermilion / cream / ink palette
 - **Preloader and intro:** counter, curtain reveal, character-by-character title animation
 - **Smooth scrolling:** GSAP ScrollSmoother with parallax
-- **Pinned horizontal "Works" section:** scroll-driven, with per-panel parallax and title reveals
+- **Pinned horizontal "Works" section:** live client sites in a browser frame. Hovering (or keyboard focus) pans a full-page screenshot from top to bottom; clicking opens the real site. On touch devices the preview plays when the panel reaches the middle of the screen.
 - **WebGL image distortion:** Three.js shader with hover ripple, scroll-velocity bend and chromatic shift
+- **Services as a process:** four steps (Talk, Design, Build, Launch), each with a short description
+- **FAQ:** native `<details>` accordion, no extra JavaScript beyond a scroll refresh when an answer opens
+- **WhatsApp CTA:** opens a chat pre-filled with a short question template (business name, type, what the site is for, logo and photos, deadline, budget)
 - **Details:** custom cursor, film grain, chapter counter rail, full-screen menu
-- **Responsive and accessible:** top-bar layout on mobile; respects `prefers-reduced-motion`; WebGL falls back to plain images
+- **Responsive and accessible:** top-bar layout on mobile; keyboard focus scrolls the horizontal section to the focused project; respects `prefers-reduced-motion`; WebGL falls back to plain images
+
+## Adding a project
+
+1. Capture a full-page screenshot at 1440px wide and save it as `img/works/<name>-full.jpg` (aim for under ~300 KB).
+2. Copy one of the live-site `<article class="panel">` blocks in `index.html`, then update the link, the title, the caption and the image path.
 
 ## Stack
 
@@ -31,4 +37,4 @@ npx serve .
 
 ## Credits
 
-Photography from [Unsplash](https://unsplash.com/), used under the Unsplash License.
+Photography for the in-progress panel from [Unsplash](https://unsplash.com/), used under the Unsplash License.
