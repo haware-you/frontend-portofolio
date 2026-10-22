@@ -37,4 +37,4 @@ npx serve .
 
 ## Credits
 
-Photography for the about and in-progress sections from [Unsplash](https://unsplash.com/), used under the Unsplash License.
+Photography for the in-progress panel from [Unsplash](https://unsplash.com/), used under the Unsplash License.

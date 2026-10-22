@@ -225,51 +225,33 @@ section { position: relative; }
 /* ---------- About ---------- */
 .about {
   background: #faf7f1;
-  padding: 16vh 4vw 14vh;
-  overflow: hidden;
+  padding: 18vh 4vw 18vh;
   display: grid;
-  /* minmax(0, …) so the giant word above can never stretch the columns
-     (Safari did, and the text lines were frozen at that narrow width) */
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  /* minmax(0, …) so long words can never stretch the columns */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 4vw;
-  align-items: center;
+  align-items: start;
 }
-.about__giant {
-  grid-column: 1 / -1;
-  min-width: 0;
-  font-family: var(--font-mega);
-  font-size: 28vw;
-  line-height: 0.78;
+.about__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 4.6vw, 4.6rem);
+  line-height: 1.02;
+  text-transform: uppercase;
   color: var(--ink);
-  margin-left: -3vw;
-  user-select: none;
+  text-wrap: balance;
+}
+.about__body { max-width: 34em; }
+.about__lead {
+  font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+  line-height: 1.3;
+  color: var(--ink);
 }
 .about__text {
-  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
-  line-height: 1.6;
-  max-width: 34em;
-}
-.dropcap {
-  float: left;
-  font-family: var(--font-display);
-  font-size: 3.4em; line-height: 0.8;
-  color: var(--red);
-  padding-right: 0.12em;
-}
-.about__caption {
-  margin-top: 2.2rem;
-  font-size: 0.95rem; line-height: 1.7;
-  color: rgba(13, 12, 11, 0.65);
-}
-.about__figure { position: relative; }
-.about__figure img {
-  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
-  filter: saturate(0.85) contrast(1.05);
-}
-.about__figure figcaption {
-  margin-top: 0.7rem;
-  font-style: italic; font-size: 0.85rem;
-  color: rgba(13, 12, 11, 0.6);
+  margin-top: 1.6rem;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.65;
+  color: rgba(13, 12, 11, 0.62);
 }
 
 /* ---------- Stats ---------- */
@@ -630,9 +612,7 @@ section { position: relative; }
   .hero__cue { right: 5vw; bottom: 5vh; width: 74px; }
   .hero__scrollhint { display: none; }
 
-  .about { grid-template-columns: minmax(0, 1fr); padding: 10vh 6vw; }
-  .about__giant { font-size: 38vw; }
-  .about__figure { max-width: 78%; margin-top: 3rem; }
+  .about { grid-template-columns: minmax(0, 1fr); gap: 2.2rem; padding: 12vh 6vw; }
 
   .stats__rows { padding: 6vh 5vw 0; }
   .stats__row { font-size: 17.5vw; }
