@@ -39,9 +39,12 @@ const countTween = gsap.to(countState, {
 
 let heroSplit;
 
+/* Split into words as well as chars: with chars alone the spaces sit loose
+   between inline-block letters, and some browsers draw them one letter off
+   ("3SITE SLIVE"). Only the chars are animated. */
 function buildSplits() {
   document.querySelectorAll('[data-split-chars]').forEach((el) => {
-    const split = new SplitText(el, { type: 'chars', charsClass: 'char' });
+    const split = new SplitText(el, { type: 'words,chars', wordsClass: 'word', charsClass: 'char' });
     gsap.set(el, { overflow: 'hidden' });
     if (el.classList.contains('hero__title')) {
       heroSplit = split;
@@ -111,6 +114,7 @@ gsap.set(preloader, { clipPath: 'inset(0 0 0% 0)' });
 document.fonts.ready.then(() => {
   buildSplits();
   buildPanelSplits();
+  fitSiteFrames();
   ScrollTrigger.refresh();
   countTween.play();
   countTween.eventCallback('onComplete', introReveal);
@@ -211,11 +215,44 @@ document.querySelectorAll('.panel a').forEach((link) => {
   });
 });
 
+/* Stretch each live-site frame down to 10px above the cap height of its
+   project title. Only ever grows the frame; its top stays where the CSS put it. */
+const glyphCtx = document.createElement('canvas').getContext('2d');
+function fitSiteFrames() {
+  document.querySelectorAll('.panel__media--site').forEach((frame) => {
+    const panel = frame.closest('.panel');
+    const title = panel.querySelector('.panel__title');
+    frame.classList.remove('is-fitted');
+    frame.style.height = '';
+    frame.style.marginBottom = '';
+
+    const pr = panel.getBoundingClientRect();
+    const fr = frame.getBoundingClientRect();
+    const tr = title.getBoundingClientRect();
+    const cs = getComputedStyle(title);
+    const lineHeight = parseFloat(cs.lineHeight);
+    glyphCtx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+    const m = glyphCtx.measureText(title.textContent.trim());
+    // line box top -> baseline -> top of the tallest letter
+    const glyphTop = tr.top - pr.top
+      + (lineHeight - (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent)) / 2
+      + m.fontBoundingBoxAscent - m.actualBoundingBoxAscent;
+
+    const top = fr.top - pr.top;
+    const height = glyphTop - 10 - top;
+    if (!(height > fr.height)) return;
+    frame.style.height = `${height}px`;
+    // the panel centres the frame, so offset it to keep the same top
+    frame.style.marginBottom = `${pr.height - height - 2 * top}px`;
+    frame.classList.add('is-fitted');
+  });
+}
+
 /* Panel title reveals — split after fonts are ready (called from loader) */
 function buildPanelSplits() {
   document.querySelectorAll('.panel').forEach((panel) => {
     const title = panel.querySelector('.panel__title');
-    const split = new SplitText(title, { type: 'chars', charsClass: 'char' });
+    const split = new SplitText(title, { type: 'words,chars', wordsClass: 'word', charsClass: 'char' });
     gsap.set(title, { overflow: 'hidden' });
     gsap.from(split.chars, {
       yPercent: 110,
@@ -473,7 +510,8 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
       trigger.addEventListener('focus', enter);
       trigger.addEventListener('blur', leave);
 
-      window.addEventListener('resize', () => this.resize());
+      // follow the frame itself: fitSiteFrames() can change its height
+      new ResizeObserver(() => this.resize()).observe(this.container);
     }
 
     resize() {
@@ -510,7 +548,10 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 250);
+  resizeTimer = setTimeout(() => {
+    fitSiteFrames();
+    ScrollTrigger.refresh();
+  }, 250);
 });
 
 /* FAQ answers change the page height when opened or closed */

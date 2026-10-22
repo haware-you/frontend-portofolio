@@ -389,6 +389,8 @@ section { position: relative; }
   aspect-ratio: 16 / 10;
   overflow: hidden;
 }
+/* fitSiteFrames() has set the frame height: the screen fills it */
+.panel__media--site.is-fitted .panel__screen { aspect-ratio: auto; flex: 1; min-height: 0; }
 /* No-WebGL preview: pan the screenshot from top to bottom.
    object-position repaints, but only on this one framed image. */
 .panel__screen img {
