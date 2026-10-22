@@ -3,8 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hawaree | Web Design &amp; Front-end Development</title>
-  <meta name="description" content="Portfolio of Abdullah Shidqi Hawari (Hawaree). I design websites and write the code for them myself." />
+  <title>Hawaree | Web Design &amp; Development for Small Businesses</title>
+  <meta name="description" content="I design and hand-code websites for small businesses: menus with WhatsApp ordering, school sites and landing pages. See live work and chat on WhatsApp." />
+  <meta name="author" content="Abdullah Shidqi Hawari" />
+  <meta name="theme-color" content="#e6380f" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Hawaree" />
+  <meta property="og:title" content="Hawaree | Web Design &amp; Development for Small Businesses" />
+  <meta property="og:description" content="I design and hand-code websites for small businesses: menus with WhatsApp ordering, school sites and landing pages." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hawaree | Web Design &amp; Development for Small Businesses" />
+  <meta name="twitter:description" content="I design and hand-code websites for small businesses: menus with WhatsApp ordering, school sites and landing pages." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Six+Caps&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
@@ -32,7 +41,7 @@
       <span></span><span></span><span></span>
     </button>
     <div class="rail__credit">HAWAREE / DESIGN &amp; BUILD</div>
-    <div class="rail__chapter"><span id="chapterNum">01</span>/05</div>
+    <div class="rail__chapter"><span id="chapterNum">01</span>/06</div>
     <div class="rail__marks">
       <span>✕</span><span>✕</span><span>✕</span>
     </div>
@@ -46,7 +55,8 @@
       <li><a href="#about" data-menu-link><span class="menu__idx">02</span><span class="menu__word">About</span></a></li>
       <li><a href="#works" data-menu-link><span class="menu__idx">03</span><span class="menu__word">Works</span></a></li>
       <li><a href="#services" data-menu-link><span class="menu__idx">04</span><span class="menu__word">Services</span></a></li>
-      <li><a href="#contact" data-menu-link><span class="menu__idx">05</span><span class="menu__word">Contact</span></a></li>
+      <li><a href="#faq" data-menu-link><span class="menu__idx">05</span><span class="menu__word">FAQ</span></a></li>
+      <li><a href="#contact" data-menu-link><span class="menu__idx">06</span><span class="menu__word">Contact</span></a></li>
     </ul>
     <div class="menu__foot">
       <span>PORTFOLIO © 2026</span>
@@ -175,20 +185,86 @@
       <!-- ============ SERVICES ============ -->
       <section class="services" id="services" data-chapter="04">
         <h2 class="services__giant" data-split-chars aria-hidden="true">SERVICES</h2>
-        <ul class="services__list">
-          <li class="services__item"><span class="services__idx">01</span><span class="services__name">Art Direction</span><span class="services__note"><em>concept · look and feel · layout</em></span></li>
-          <li class="services__item"><span class="services__idx">02</span><span class="services__name">Web Design</span><span class="services__note"><em>menus &amp; ordering · school sites · landing pages</em></span></li>
-          <li class="services__item"><span class="services__idx">03</span><span class="services__name">Interaction &amp; Motion</span><span class="services__note"><em>GSAP · WebGL · micro-interactions</em></span></li>
-          <li class="services__item"><span class="services__idx">04</span><span class="services__name">Creative Development</span><span class="services__note"><em>hand-written HTML, CSS &amp; JavaScript</em></span></li>
-        </ul>
+        <p class="services__lede"><em>How a project runs, from your first message to launch.</em></p>
+        <ol class="services__list">
+          <li class="services__item">
+            <span class="services__idx">01</span>
+            <div class="services__body">
+              <h3 class="services__name">Talk</h3>
+              <p class="services__desc">We chat on WhatsApp about your business, your customers and what the site needs to do. I ask for your logo, photos and any text you already have.</p>
+            </div>
+            <span class="services__note"><em>brief · goals · your content</em></span>
+          </li>
+          <li class="services__item">
+            <span class="services__idx">02</span>
+            <div class="services__body">
+              <h3 class="services__name">Design</h3>
+              <p class="services__desc">I plan the pages and design the look: colours, type, layout and photos. You see the design before I build it and tell me what to change.</p>
+            </div>
+            <span class="services__note"><em>art direction · layout · your feedback</em></span>
+          </li>
+          <li class="services__item">
+            <span class="services__idx">03</span>
+            <div class="services__body">
+              <h3 class="services__name">Build</h3>
+              <p class="services__desc">I write the HTML, CSS and JavaScript by hand, add motion where it helps, and test every page on a phone as well as a laptop.</p>
+            </div>
+            <span class="services__note"><em>hand-written code · GSAP · mobile first</em></span>
+          </li>
+          <li class="services__item">
+            <span class="services__idx">04</span>
+            <div class="services__body">
+              <h3 class="services__name">Launch</h3>
+              <p class="services__desc">I put the site live, check every link and WhatsApp button on a real phone, and walk you through the finished site.</p>
+            </div>
+            <span class="services__note"><em>live link · checks · handover</em></span>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="faq" id="faq" data-chapter="05">
+        <h2 class="faq__giant" data-split-chars aria-hidden="true">FAQ</h2>
+        <h2 class="faq__title">Questions clients ask</h2>
+        <div class="faq__list">
+          <details class="faq__item">
+            <summary class="faq__q">How much does a website cost?</summary>
+            <p class="faq__a">It depends on how many pages and features you need. Tell me about your business on WhatsApp and I will send you a price before any work starts.</p>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">How long does it take?</summary>
+            <p class="faq__a">It depends on the size of the site and how quickly your logo, photos and text are ready. You get a timeline together with the price.</p>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">What do I need to prepare?</summary>
+            <p class="faq__a">Your business name, your logo if you have one, photos of your products or place, and the information you want on the site. If you are missing something, we can work it out together.</p>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Can I ask for changes?</summary>
+            <p class="faq__a">Yes. You see the design before I build it, and we agree on rounds of changes before work starts.</p>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Do you use templates or website builders?</summary>
+            <p class="faq__a">No. I design each site for the business it belongs to and write the code by hand.</p>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Will it work on phones?</summary>
+            <p class="faq__a">Yes. Most of your customers will open it on a phone, so I design for phones first and test on real ones.</p>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Can customers order through the site?</summary>
+            <p class="faq__a">Yes. On the KOBAB site, customers pick items from the menu and the order is sent to the shop on WhatsApp. I can set up the same for your business.</p>
+          </details>
+        </div>
       </section>
 
       <!-- ============ CONTACT ============ -->
-      <section class="contact" id="contact" data-chapter="05">
+      <section class="contact" id="contact" data-chapter="06">
         <p class="contact__pre"><em>Have a website to build?</em></p>
         <h2 class="contact__title" data-split-chars>LET'S TALK</h2>
         <div class="contact__links">
-          <a class="contact__mail" href="https://wa.me/6285314851480?text=Halo%20Hawaree%2C%20saya%20mau%20ngobrol%20soal%20website." target="_blank" rel="noopener" data-cursor="link">Chat on WhatsApp <span aria-hidden="true">↗</span></a>
+          <a class="contact__mail" href="https://wa.me/6285314851480?text=Halo%20Hawaree%2C%20saya%20mau%20ngobrol%20soal%20website.%0A%0ANama%20usaha%3A%0AJenis%20usaha%3A%0AWebsite%20untuk%20apa%3F%20%28menu%20%26%20order%20%2F%20profil%20usaha%20%2F%20sekolah%20%2F%20lainnya%29%3A%0ASudah%20punya%20logo%20%26%20foto%3F%20%28sudah%20%2F%20belum%29%3A%0ATarget%20selesai%3A%0AKisaran%20budget%20%28opsional%29%3A" target="_blank" rel="noopener" data-cursor="link">Chat on WhatsApp <span aria-hidden="true">↗</span></a>
+          <p class="contact__hint">WhatsApp opens with a few short questions about your business. Fill in what you know and press send.</p>
           <a class="contact__alt" href="https://www.instagram.com/hawaree_yu/" target="_blank" rel="noopener" data-cursor="link">or DM @hawaree_yu on Instagram</a>
         </div>
         <footer class="contact__foot">

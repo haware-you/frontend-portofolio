@@ -512,3 +512,8 @@ window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 250);
 });
+
+/* FAQ answers change the page height when opened or closed */
+document.querySelectorAll('.faq__item').forEach((item) => {
+  item.addEventListener('toggle', () => ScrollTrigger.refresh());
+});

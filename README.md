@@ -9,6 +9,9 @@ Portfolio of **Abdullah Shidqi Hawari** (Hawaree): websites designed and built b
 - **Smooth scrolling:** GSAP ScrollSmoother with parallax
 - **Pinned horizontal "Works" section:** live client sites in a browser frame. Hovering (or keyboard focus) pans a full-page screenshot from top to bottom; clicking opens the real site. On touch devices the preview plays when the panel reaches the middle of the screen.
 - **WebGL image distortion:** Three.js shader with hover ripple, scroll-velocity bend and chromatic shift
+- **Services as a process:** four steps (Talk, Design, Build, Launch), each with a short description
+- **FAQ:** native `<details>` accordion, no extra JavaScript beyond a scroll refresh when an answer opens
+- **WhatsApp CTA:** opens a chat pre-filled with a short question template (business name, type, what the site is for, logo and photos, deadline, budget)
 - **Details:** custom cursor, film grain, chapter counter rail, full-screen menu
 - **Responsive and accessible:** top-bar layout on mobile; keyboard focus scrolls the horizontal section to the focused project; respects `prefers-reduced-motion`; WebGL falls back to plain images
 
