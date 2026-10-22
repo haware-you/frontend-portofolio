@@ -474,8 +474,11 @@ section { position: relative; }
   margin-left: -1.5vw;
   user-select: none;
 }
-.contact__mail {
+.contact__links {
   margin-top: 4.5vh;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1.1rem;
+}
+.contact__mail {
   align-self: flex-start;
   font-family: var(--font-serif); font-style: italic;
   font-size: clamp(1.4rem, 3vw, 2.6rem);
@@ -484,6 +487,14 @@ section { position: relative; }
   transition: color 0.3s, border-color 0.3s;
 }
 .contact__mail:hover { color: var(--red); }
+.contact__alt {
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  opacity: 0.75;
+  transition: color 0.3s, opacity 0.3s;
+}
+.contact__alt:hover { color: var(--red); opacity: 1; }
+.contact__mail:focus-visible,
+.contact__alt:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
 .contact__foot {
   margin-top: auto;
   padding: 5vh 0 1.6rem;
