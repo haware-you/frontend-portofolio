@@ -1,5 +1,5 @@
 /* ============================================================
-   OBLIQUE — editorial landing page (concept piece)
+   HAWAREE — portfolio of Abdullah Shidqi Hawari
    GSAP (ScrollTrigger / ScrollSmoother / SplitText) + Three.js
    ============================================================ */
 
@@ -182,6 +182,35 @@ document.querySelectorAll('.panel').forEach((panel) => {
   );
 });
 
+/* Live-site previews on touch: no hover, so play the screenshot while the
+   panel covers the middle of the screen. Desktop uses hover/focus (CSS, or
+   the WebGL uScroll uniform below). */
+if (isTouch && !reducedMotion) {
+  document.querySelectorAll('.panel__media--site').forEach((media) => {
+    ScrollTrigger.create({
+      trigger: media.closest('.panel'),
+      containerAnimation: worksTween,
+      start: 'left center',
+      end: 'right center',
+      toggleClass: { targets: media, className: 'is-previewing' },
+    });
+  });
+}
+
+/* Keyboard: panels sit off-screen inside a translated, overflow:hidden track,
+   so tabbing to a link would focus something invisible. Scroll the page to
+   the vertical position where that panel is in view, and undo the browser's
+   own focus-scroll of the clipped container. */
+document.querySelectorAll('.panel a').forEach((link) => {
+  link.addEventListener('focus', () => {
+    worksSection.scrollLeft = 0;
+    const st = worksTween.scrollTrigger;
+    const panel = link.closest('.panel');
+    const progress = gsap.utils.clamp(0, 1, panel.offsetLeft / getScrollAmount());
+    smoother.scrollTo(st.start + progress * (st.end - st.start), false);
+  });
+});
+
 /* Panel title reveals — split after fonts are ready (called from loader) */
 function buildPanelSplits() {
   document.querySelectorAll('.panel').forEach((panel) => {
@@ -276,14 +305,14 @@ if (!isTouch && !reducedMotion) {
     yTo(e.clientY);
   });
 
-  document.querySelectorAll('[data-cursor="drag"]').forEach((el) => {
+  document.querySelectorAll('[data-cursor="visit"]').forEach((el) => {
     el.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-drag');
-      label.textContent = 'DRAG';
+      cursor.classList.add('is-visit');
+      label.textContent = 'VISIT';
     });
-    el.addEventListener('mouseleave', () => cursor.classList.remove('is-drag'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('is-visit'));
   });
-  document.querySelectorAll('a, button').forEach((el) => {
+  document.querySelectorAll('a:not([data-cursor="visit"]), button').forEach((el) => {
     el.addEventListener('mouseenter', () => cursor.classList.add('is-link'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('is-link'));
   });
@@ -311,6 +340,9 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
     uniform float uVelocity;
     uniform float uPlaneRatio;
     uniform float uImageRatio;
+    uniform float uAnchorTop;
+    uniform float uScroll;
+    uniform float uDistort;
     varying vec2 vUv;
 
     void main() {
@@ -320,16 +352,20 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
         : vec2(uPlaneRatio / uImageRatio, 1.0);
       vec2 uv = (vUv - 0.5) * scale + 0.5;
 
+      // full-page screenshots: pin to the top, uScroll pans to the bottom
+      float topY = (vUv.y - 1.0) * scale.y + 1.0 - uScroll * (1.0 - scale.y);
+      uv.y = mix(uv.y, topY, uAnchorTop);
+
       // scroll bend — wave along x driven by scroll velocity
-      uv.y += sin(uv.x * 3.14159) * uVelocity * 0.035;
+      uv.y += sin(uv.x * 3.14159) * uVelocity * 0.035 * uDistort;
 
       // hover ripple
       float d = distance(vUv, uHover);
-      float ripple = sin(d * 24.0 - uTime * 4.0) * exp(-d * 4.5) * uHoverState * 0.025;
+      float ripple = sin(d * 24.0 - uTime * 4.0) * exp(-d * 4.5) * uHoverState * 0.025 * uDistort;
       uv += normalize(vUv - uHover + 0.0001) * ripple;
 
       // chromatic shift scaled by motion
-      float shift = uVelocity * 0.012 + uHoverState * 0.006;
+      float shift = (uVelocity * 0.012 + uHoverState * 0.006) * uDistort;
       float r = texture2D(uTexture, uv + vec2(shift, 0.0)).r;
       float g = texture2D(uTexture, uv).g;
       float b = texture2D(uTexture, uv - vec2(shift, 0.0)).b;
@@ -377,6 +413,10 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
         uVelocity: { value: 0 },
         uPlaneRatio: { value: 1 },
         uImageRatio: { value: 1 },
+        uAnchorTop: { value: img.hasAttribute('data-preview') ? 1 : 0 },
+        uScroll: { value: 0 },
+        // live-site screenshots stay readable: keep only a hint of the effect
+        uDistort: { value: img.hasAttribute('data-preview') ? 0.2 : 1 },
       };
 
       const loader = new THREE.TextureLoader();
@@ -410,12 +450,28 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
           1 - (e.clientY - r.top) / r.height
         );
       });
-      this.container.addEventListener('mouseenter', () =>
-        gsap.to(this.uniforms.uHoverState, { value: 1, duration: 0.6, ease: 'power2.out' })
-      );
-      this.container.addEventListener('mouseleave', () =>
-        gsap.to(this.uniforms.uHoverState, { value: 0, duration: 0.6, ease: 'power2.out' })
-      );
+      // hover and keyboard focus on the link (or the frame) start the preview
+      const trigger = img.closest('a') || this.container;
+      const enter = () => {
+        gsap.to(this.uniforms.uHoverState, { value: 1, duration: 0.6, ease: 'power2.out' });
+        if (this.uniforms.uAnchorTop.value) {
+          // pan speed stays constant regardless of screenshot length
+          const visible = Math.min(1, this.uniforms.uImageRatio.value / this.uniforms.uPlaneRatio.value);
+          gsap.to(this.uniforms.uScroll, {
+            value: 1,
+            duration: gsap.utils.clamp(2, 12, (1 / visible - 1) * 1.6),
+            ease: 'power1.inOut',
+          });
+        }
+      };
+      const leave = () => {
+        gsap.to(this.uniforms.uHoverState, { value: 0, duration: 0.6, ease: 'power2.out' });
+        gsap.to(this.uniforms.uScroll, { value: 0, duration: 0.9, ease: 'power2.out' });
+      };
+      trigger.addEventListener('mouseenter', enter);
+      trigger.addEventListener('mouseleave', leave);
+      trigger.addEventListener('focus', enter);
+      trigger.addEventListener('blur', leave);
 
       window.addEventListener('resize', () => this.resize());
     }
