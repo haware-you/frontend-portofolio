@@ -357,10 +357,13 @@ section { position: relative; }
 
 /* Live-site panels: browser frame around a full-page screenshot */
 .panel__media--site {
-  width: clamp(300px, 50vw, 820px);
+  /* Up to 1.3x the original (65vw / 1066px). The height term keeps the
+     16:10 frame above the project title on shorter screens; it never
+     drops below the original 50vw / 820px. */
+  width: max(min(50vw, 820px), min(65vw, (100vh - 380px) * 1.6, 1066px));
   aspect-ratio: auto;
   display: flex; flex-direction: column;
-  margin-bottom: 8vh;
+  margin-bottom: 28vh;
   background: var(--ink);
   border-radius: 10px;
   box-shadow: 0 30px 60px -20px rgba(13, 12, 11, 0.45);
