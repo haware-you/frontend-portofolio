@@ -217,7 +217,8 @@ document.querySelectorAll('.panel a').forEach((link) => {
 });
 
 /* Stretch each live-site frame down to 10px above the cap height of its
-   project title. Only ever grows the frame; its top stays where the CSS put it. */
+   project title, or to the description if that is higher and under the frame.
+   Only ever grows the frame; its top stays where the CSS put it. */
 const glyphCtx = document.createElement('canvas').getContext('2d');
 function fitSiteFrames() {
   document.querySelectorAll('.panel__media--site').forEach((frame) => {
@@ -239,8 +240,18 @@ function fitSiteFrames() {
       + (lineHeight - (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent)) / 2
       + m.fontBoundingBoxAscent - m.actualBoundingBoxAscent;
 
+    // ...or 16px above the description, where it sits under the frame
+    let bottom = glyphTop - 10;
+    const desc = panel.querySelector('.panel__desc');
+    if (desc) {
+      const dr = desc.getBoundingClientRect();
+      if (dr.left < fr.right && dr.right > fr.left && dr.top > fr.top) {
+        bottom = Math.min(bottom, dr.top - pr.top - 16);
+      }
+    }
+
     const top = fr.top - pr.top;
-    const height = glyphTop - 10 - top;
+    const height = bottom - top;
     if (!(height > fr.height)) return;
     frame.style.height = `${height}px`;
     // the panel centres the frame, so offset it to keep the same top

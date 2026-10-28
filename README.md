@@ -18,7 +18,8 @@ Portfolio of **Abdullah Shidqi Hawari** (Hawaree): websites designed and built b
 ## Adding a project
 
 1. Capture a full-page screenshot at 1440px wide and save it as `img/works/<name>-full.jpg` (aim for under ~300 KB).
-2. Copy one of the live-site `<article class="panel">` blocks in `index.html`, then update the link, the title, the caption and the image path.
+2. Copy one of the live-site `<article class="panel">` blocks in `index.html`, then update the link, the title, the caption, the description and the image path.
+3. Update the "SITES LIVE" count in the stats section and the project list in the hero intro.
 
 ## Stack
 

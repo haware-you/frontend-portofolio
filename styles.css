@@ -336,6 +336,18 @@ section { position: relative; }
 }
 .panel--red .panel__cat,
 .panel--red .panel__role { opacity: 1; }
+/* What the site does, bottom right beside the title block, clear of the
+   floating WhatsApp button */
+.panel__desc {
+  position: absolute; right: 3vw; bottom: 5rem;
+  max-width: min(30vw, 24rem);
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  line-height: 1.5;
+  opacity: 0.85;
+}
+.panel--red .panel__desc { opacity: 1; }
+/* leave the description its column: long titles wrap instead of running into it */
+.panel:not(.panel--cta) .panel__info { max-width: calc(100% - 9vw - min(30vw, 24rem)); }
 
 /* Last panel: an invitation instead of a project */
 .panel--cta .panel__info {
@@ -685,6 +697,19 @@ section { position: relative; }
   .panel__info { bottom: 5vh; }
   .panel__title { font-size: 13.5vw; }
   .panel__media--site { width: min(88vw, 520px); margin-bottom: 22vh; }
+  /* no room beside the title: the description goes above the frame, in
+     flow, so a longer one pushes the frame down instead of covering it */
+  .panel:not(.panel--cta) {
+    flex-direction: column; justify-content: flex-start;
+    padding-top: calc(54px + 2.5vh);
+  }
+  .panel:not(.panel--cta) .panel__info { max-width: 80%; }
+  .panel__desc {
+    position: static; order: -1;
+    align-self: stretch;
+    max-width: none;
+    margin: 0 6vw 2.5vh;
+  }
 
   .services__giant { font-size: 36vw; }
   .services__item { grid-template-columns: 2.6rem minmax(0, 1fr); }

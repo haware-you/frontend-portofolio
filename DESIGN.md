@@ -51,12 +51,13 @@ Neighbouring sections use different backgrounds, so each one reads as a new chap
 ## Works panels
 
 - The last panel is an invitation, not a project: "Next: your site" with a WhatsApp button. No stock images.
-- Panel colours cycle **red, cream, ink, red**. Two panels next to each other never share a colour.
+- Panel colours are **red, cream, ink, cream**, then the red invitation panel. Two panels next to each other never share a colour.
 - Each live project gets a browser frame with a **full-page screenshot**. It pans top to bottom on hover or keyboard focus, and on phones when the panel reaches the middle of the screen.
 - **Frame width:** up to 1.3x the original, `max(min(50vw, 820px), min(65vw, (100vh - 380px) * 1.6, 1066px))`.
-- **Frame height:** `fitSiteFrames()` in `script.js` stretches the frame down to **10px above the top of the title letters**. Keep that gap if you change the title size.
-- **Screenshots:** capture at 1440px wide, resize to 1200px wide, aim for about 300 KB, and save as `img/works/<name>-full.jpg`.
+- **Frame height:** `fitSiteFrames()` in `script.js` stretches the frame down to **10px above the top of the title letters**, or 16px above the description where that sits under the frame (around 860px wide). Keep those gaps if you change the title size.
+- **Screenshots:** capture at 1440px wide, resize to 1200px wide, aim for about 300 KB, and save as `img/works/<name>-full.jpg`. Check that no sticky bar or floating button from the site is baked into the capture.
 - **Panel text:** title, a one-line caption (*what the business is, where.* what the site does), "Design + code · year", then "Visit site ↗".
+- **Description (`.panel__desc`):** two or three sentences on what a visitor can do on the site. Only describe what is on the live site; no results or numbers you can't check. On desktop it sits bottom right, above the floating WhatsApp button, and the title block narrows so long titles wrap instead of running into it. On phones it sits above the frame.
 
 ## Copy voice
 
