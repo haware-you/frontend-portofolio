@@ -10,10 +10,11 @@ All colours live in the `:root` block of `styles.css`. Don't add colours anywher
 
 | Token | Hex | Used for |
 |---|---|---|
-| `--red` | `#e6380f` | Accent and big type only: preloader, hero title, LET'S TALK, FAQ giant word, cursor, focus outlines. Cream on this red is 3.7:1, so never put small text on it. |
-| `--red-deep` | `#c52e0a` | Any red surface or red text that holds small text: Process section, red Works panels, menu overlay, WhatsApp buttons, Process hover text. Cream on it is 4.8:1 (passes WCAG AA). |
+| `--red` | `#e6380f` | Accent and big type only: preloader, hero title, LET'S TALK, FAQ giant word, cursor, focus outlines. Cream on this red is 3.7:1, and so is this red on cream, so never use it with small text in either direction. |
+| `--red-deep` | `#c52e0a` | Any red surface or red text that holds small text: Process section, red Works panels, menu overlay, WhatsApp buttons, Process hover text, footer links and Instagram link hover. Cream on it is 4.8:1 (passes WCAG AA). |
+
+Don't lower the opacity of small red text. Contrast drops with it: `--red-deep` at 0.7 opacity on cream falls below 4.5:1. Fade the text colour (for example `rgba(13, 12, 11, 0.75)`) instead.
 | `--cream` | `#f3eee6` | Light background (hero, contact), text on dark or red |
-| `--cream-dim` | `#e9e2d6` | The WhatsApp message preview bubble in Contact |
 | `--ink` | `#0d0c0b` | Dark background (stats, works, FAQ), body text on light |
 | (literal) | `#faf7f1` | About background, a step lighter than cream |
 
@@ -42,11 +43,11 @@ Decisions already made:
 | 02 | About | `#faf7f1` | Two columns: the customer's moment as the heading, who Hawaree is and what he does on the right. No photo. |
 | 02 | Stats | ink | Three Six Caps rows; the middle one is outlined |
 | 03 | Works | ink + per-panel colour | Horizontal pinned scroll, one panel per project |
-| 04 | Process | red-deep | Four steps: Talk, Design, Build, Launch. Called Process, not Services, because it describes how a project runs. |
+| 04 | Process | red-deep | Four steps: Talk, Design, Build, Launch. Called Process, not Services, because it describes how a project runs. In the code it is still `#services` and `.services__*`. |
 | 05 | FAQ | ink | Two columns: "Ask on WhatsApp" prompt left, native `<details>` accordion right |
-| 06 | Contact | cream | Filled WhatsApp button, a preview of the pre-filled message, Instagram link, footer |
+| 06 | Contact | cream | Filled WhatsApp button, a line saying what it opens, Instagram link, footer |
 
-Neighbouring sections use different backgrounds, so each one reads as a new chapter. If you add a section, update the menu, the `data-chapter` numbers and the `/06` in the side rail.
+Stats shares 02 with About on purpose: it is part of the introduction, not its own chapter. Neighbouring sections use different backgrounds, so each one reads as a new chapter. If you add a section, update the menu, the `data-chapter` numbers and the `/06` in the side rail.
 
 ## Works panels
 
@@ -62,8 +63,9 @@ Neighbouring sections use different backgrounds, so each one reads as a new chap
 
 - **Lead with the client's problem, not with Hawaree.** Customers need to find the menu, prices and WhatsApp number on a phone. Say how the site solves that.
 - **Write plainly.** Short sentences and active voice. Avoid filler like "worth noting".
-- **English on the site. Indonesian in the WhatsApp message template,** because that's what clients type in.
+- **English on the site.**
 - **Never invent proof.** No made-up client logos, "trusted by" grids, review stars, testimonials, or numbers like "1,000 companies".
+- **Real proof is welcome.** A client quote can go on the site if it is word for word, carries the client's name and business, and the client has agreed in writing to it being published. Keep that agreement.
 - **No prices, durations or revision counts** unless Hawaree has confirmed them. The FAQ answers say "it depends" and promise a price before work starts.
 - **Spine sentence:** a customer opens a phone, looks for one thing, and either messages you or leaves. Every section should serve that moment; if it doesn't, cut it or rewrite it.
 - **Job title: "UI designer & front-end developer".** Use it in the page title, link previews and the About intro. Don't use "UI/UX" until at least one case study shows real user research or testing (who used it, what they struggled with, what changed).
@@ -71,26 +73,17 @@ Neighbouring sections use different backgrounds, so each one reads as a new chap
 
 ## WhatsApp CTA
 
-There are four WhatsApp links, all with the same URL. If you change the message, update all four:
+There are four WhatsApp links, all with the same URL. If you change it, update all four:
 1. the floating "Chat on WhatsApp" button (bottom right on every section; hidden while Contact is on screen)
 2. the button on the last Works panel ("Next: your site")
 3. "Ask on WhatsApp" in the FAQ
-4. the main button in Contact, whose message preview next to it must match the text below
+4. the main button in Contact
 
-Each one opens `wa.me/6285314851480` with this message pre-filled:
+Each one opens `https://wa.me/6285314851480` with no pre-filled message. The visitor writes their own first message.
 
-```
-Halo Hawaree, saya mau ngobrol soal website.
+A pre-filled question template (business name, type, what the site is for, logo and photos, deadline, budget) and a preview of it in Contact were tried and removed. If you bring it back, add `?text=` with the URL-encoded message to all four links, and show the visitor what will be sent.
 
-Nama usaha:
-Jenis usaha:
-Website untuk apa? (menu & order / profil usaha / sekolah / lainnya):
-Sudah punya logo & foto? (sudah / belum):
-Target selesai:
-Kisaran budget (opsional):
-```
-
-If you change the questions, URL-encode the text again. Keep the line under the button that tells visitors what will open.
+Keep the line under the Contact button that tells visitors what will open.
 
 ## Motion
 
@@ -108,7 +101,17 @@ These all broke at least once. Check them after any layout change.
 3. **Line-split text freezes its line breaks** when it's split, after fonts load. Anything that changes a column's width after that leaves the lines wrong until reload.
 4. **Anything that changes page height must call `ScrollTrigger.refresh()`.** Opening an FAQ answer does this; without it, the smooth scroll can't reach the footer.
 5. **The WebGL canvas follows its frame with a `ResizeObserver`.** Keep that if frames are resized in code.
-6. **On touch screens, wrap hover colours in `@media (hover: hover)`**, so a tapped item doesn't stay highlighted.
+6. **Wrap every hover style in `@media (hover: hover)`**, so a tapped item doesn't stay highlighted on a phone. This covers colours, backgrounds and padding shifts. The one exception is the Works screenshot pan, which is meant to play on tap.
+
+## Mobile layout
+
+At 820px and below (`@media (max-width: 820px)` in `styles.css`):
+- The side rail becomes a 54px top bar, and `--rail-w` drops to 0.
+- About, FAQ and Contact stack into one column.
+- Giant words and titles switch to larger `vw` sizes so they still fill the width.
+- The hero scroll hint is hidden.
+
+Any new section needs its own rules in that block.
 
 ## Before you push a visual change
 
@@ -116,4 +119,7 @@ These all broke at least once. Check them after any layout change.
 - No sideways scroll at any width.
 - Look at the result in **Safari** as well as Chrome. Most of the bugs above showed up only in Safari.
 - Open one FAQ answer and scroll to the footer.
+- Tab through the whole page with the keyboard. Each Works panel should scroll into view when its frame gets focus, and the focus outline should be visible on every background.
+- With the menu open, check that Tab stays inside the menu and Escape or the close button returns you to the page. (Not yet verified; check it once and record the result here.)
+- Check a heading with a screen reader (VoiceOver on Safari is enough). Letter-split headings must be read as words, not one letter at a time. (Not yet verified; check it once and record the result here.)
 - Tap "Chat on WhatsApp" on a real phone after deploying.
