@@ -55,6 +55,18 @@ ul { list-style: none; }
   font-size: clamp(4rem, 12vw, 9rem);
   line-height: 1;
 }
+/* Last resort: if script.js breaks after the libraries loaded, never keep
+   the curtain up. script.js normally removes it after about 3 seconds. */
+html.js .preloader { animation: preloader-failsafe 0s 8s forwards; }
+@keyframes preloader-failsafe { to { visibility: hidden; } }
+
+/* ---------- No JavaScript / GSAP failed to load ---------- */
+html:not(.js) .preloader,
+html:not(.js) .cursor,
+html:not(.js) .rail__burger { display: none; }
+/* Works can't scroll sideways without GSAP: stack the panels instead */
+html:not(.js) .works__track { flex-direction: column; width: auto; height: auto; }
+html:not(.js) .panel { height: 100vh; height: 100svh; }
 
 /* ---------- Grain ---------- */
 .grain {
@@ -112,7 +124,7 @@ ul { list-style: none; }
   width: 22px; height: 2px; background: var(--ink);
   transition: transform 0.3s;
 }
-.rail__burger:hover span:nth-child(2) { transform: scaleX(0.6); }
+@media (hover: hover) { .rail__burger:hover span:nth-child(2) { transform: scaleX(0.6); } }
 .rail__credit {
   margin-top: 2.2rem;
   writing-mode: vertical-rl;
@@ -154,7 +166,7 @@ ul { list-style: none; }
   border-bottom: 1px solid rgba(243, 238, 230, 0.25);
   transition: padding-left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.menu__list a:hover { padding-left: 1.2rem; }
+@media (hover: hover) { .menu__list a:hover { padding-left: 1.2rem; } }
 .menu__idx { font-family: var(--font-mega); font-size: 1.4rem; opacity: 0.7; }
 .menu__word {
   font-family: var(--font-display);
@@ -444,9 +456,11 @@ section { position: relative; }
   cursor: default;
 }
 .services__item:last-child { border-bottom: 1px solid rgba(243, 238, 230, 0.35); }
-.services__item:hover {
-  background: var(--cream); color: var(--red-deep);
-  padding-left: 1.4rem;
+@media (hover: hover) {
+  .services__item:hover {
+    background: var(--cream); color: var(--red-deep);
+    padding-left: 1.4rem;
+  }
 }
 .services__idx { font-family: var(--font-mega); font-size: 1.6rem; opacity: 0.75; }
 .services__name {
@@ -475,17 +489,21 @@ section { position: relative; }
   letter-spacing: 0.06em; text-transform: uppercase;
   transition: background 0.3s, color 0.3s;
 }
-.btn-wa:hover { background: var(--ink); color: var(--cream); }
 .btn-wa:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
 .btn-wa--small { font-size: 0.95rem; padding: 0.8em 1.2em; }
 .btn-wa--large {
   background: var(--red-deep); color: var(--cream);
   font-size: clamp(1.15rem, 1.8vw, 1.6rem);
 }
-.btn-wa--large:hover { background: var(--ink); }
 .btn-wa--large:focus-visible { outline-color: var(--red-deep); }
 .faq .btn-wa--small { background: var(--red-deep); color: var(--cream); }
-.faq .btn-wa--small:hover { background: var(--cream); color: var(--ink); }
+/* Hover colours only where a real pointer can hover (DESIGN.md rule 6) */
+@media (hover: hover) {
+  .btn-wa:hover { background: var(--ink); color: var(--cream); }
+  .btn-wa--large:hover { background: var(--ink); }
+  .faq .btn-wa--small:hover { background: var(--cream); color: var(--ink); }
+  .wa-float:hover { background: var(--red-deep); }
+}
 
 /* Persistent button, bottom right; script.js hides it over Contact */
 .wa-float {
@@ -501,7 +519,6 @@ section { position: relative; }
   box-shadow: 0 0 0 1px rgba(243, 238, 230, 0.45), 0 12px 30px -10px rgba(13, 12, 11, 0.55);
   transition: opacity 0.35s, transform 0.35s, background 0.3s;
 }
-.wa-float:hover { background: var(--red-deep); }
 .wa-float:focus-visible { outline: 3px solid var(--red-deep); outline-offset: 3px; }
 .wa-float.is-hidden { opacity: 0; transform: translateY(12px); pointer-events: none; }
 
@@ -620,7 +637,7 @@ section { position: relative; }
   opacity: 0.75;
   transition: color 0.3s, opacity 0.3s;
 }
-.contact__alt:hover { color: var(--red); opacity: 1; }
+@media (hover: hover) { .contact__alt:hover { color: var(--red); opacity: 1; } }
 .contact__alt:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
 .contact__foot {
   margin-top: auto;
@@ -671,7 +688,8 @@ section { position: relative; }
   .hero { padding-top: 54px; }
   .hero__title { font-size: 24vw; margin-top: 2vh; }
   .hero__intro { padding-bottom: 16vh; max-width: 86%; }
-  .hero__cue { right: 5vw; bottom: 5vh; width: 74px; }
+  /* decorative, and the floating WhatsApp button owns this corner on phones */
+  .hero__cue { display: none; }
   .hero__scrollhint { display: none; }
 
   .about { grid-template-columns: minmax(0, 1fr); gap: 2.2rem; padding: 12vh 6vw; }

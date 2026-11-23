@@ -14,6 +14,9 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Hawaree | UI Designer &amp; Front-end Developer for Small Businesses" />
   <meta name="twitter:description" content="I design and hand-code websites for small businesses: menus with WhatsApp ordering, school sites and landing pages." />
+  <!-- .js turns on the preloader and animation styles. Without it (no JS, or
+       GSAP failed to load) the CSS shows a plain, fully readable page. -->
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Six+Caps&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
@@ -297,6 +300,16 @@ Kisaran budget (opsional):</p>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
-  <script src="script.js"></script>
+  <script>
+    /* Start the animated site only if every GSAP file loaded. If the CDN
+       failed, drop .js so the preloader never covers the page. */
+    if (window.gsap && window.ScrollTrigger && window.ScrollSmoother && window.SplitText) {
+      var main = document.createElement('script');
+      main.src = 'script.js';
+      document.body.appendChild(main);
+    } else {
+      document.documentElement.classList.remove('js');
+    }
+  </script>
 </body>
 </html>

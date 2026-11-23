@@ -109,11 +109,14 @@ These all broke at least once. Check them after any layout change.
 4. **Anything that changes page height must call `ScrollTrigger.refresh()`.** Opening an FAQ answer does this; without it, the smooth scroll can't reach the footer.
 5. **The WebGL canvas follows its frame with a `ResizeObserver`.** Keep that if frames are resized in code.
 6. **On touch screens, wrap hover colours in `@media (hover: hover)`**, so a tapped item doesn't stay highlighted.
+7. **The page must work without JavaScript or if the GSAP CDN fails.** `index.html` adds a `js` class to `<html>`, then loads `script.js` only if all four GSAP files loaded; otherwise it removes `js`. Styles under `html:not(.js)` hide the preloader, cursor and menu button and stack the Works panels vertically. A CSS failsafe hides the preloader after 8 seconds whatever happens. Anything new that JS hides or moves needs a `html:not(.js)` fallback.
+8. **The red scroll circle (`.hero__cue`) is hidden on phones**, because the floating WhatsApp button sits in that corner.
 
 ## Before you push a visual change
 
 - Check 390, 860, 1366x768, 1440x900 and 1920x1080.
 - No sideways scroll at any width.
 - Look at the result in **Safari** as well as Chrome. Most of the bugs above showed up only in Safari.
+- Load the page once with JavaScript turned off: no red curtain, every section and Works panel readable.
 - Open one FAQ answer and scroll to the footer.
 - Tap "Chat on WhatsApp" on a real phone after deploying.
