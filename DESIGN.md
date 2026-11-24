@@ -52,6 +52,7 @@ Neighbouring sections use different backgrounds, so each one reads as a new chap
 
 - The last panel is an invitation, not a project: "Next: your site" with a WhatsApp button. No stock images.
 - Panel colours cycle **red, cream, ink, red**. Two panels next to each other never share a colour.
+- The browser bar shows "<Project> · live site", not the web address. The sites are on temporary vercel.app addresses, which read as practice work. The frame and "Visit site ↗" still link to the real site.
 - Each live project gets a browser frame with a **full-page screenshot**. It pans top to bottom on hover or keyboard focus, and on phones when the panel reaches the middle of the screen.
 - **Frame width:** up to 1.3x the original, `max(min(50vw, 820px), min(65vw, (100vh - 380px) * 1.6, 1066px))`.
 - **Frame height:** `fitSiteFrames()` in `script.js` stretches the frame down to **10px above the top of the title letters**. Keep that gap if you change the title size.
