@@ -641,6 +641,18 @@ section { position: relative; }
 }
 @media (hover: hover) { .contact__alt:hover { color: var(--red); opacity: 1; } }
 .contact__alt:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
+.contact__alt { overflow-wrap: anywhere; }
+/* Partnership line: a second audience, so it sits apart and quieter */
+.contact__partner {
+  margin-top: 0.8rem; padding-top: 1.2rem;
+  border-top: 1px solid rgba(13, 12, 11, 0.18);
+  max-width: 40ch;
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.5;
+  color: rgba(13, 12, 11, 0.82);
+}
+.contact__partner a { color: var(--red-deep); border-bottom: 1px solid currentColor; }
+.contact__partner a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+@media (hover: hover) { .contact__partner a:hover { color: var(--ink); } }
 .contact__foot {
   margin-top: auto;
   padding: 5vh 0 1.6rem;

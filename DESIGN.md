@@ -44,7 +44,7 @@ Decisions already made:
 | 03 | Works | ink + per-panel colour | Horizontal pinned scroll, one panel per project |
 | 04 | Process | red-deep | Four steps: Talk, Design, Build, Launch. Talk names both channels: WhatsApp first, Instagram DM (@hawaree_yu) second. Called Process, not Services, because it describes how a project runs. |
 | 05 | FAQ | ink | Two columns: "Ask on WhatsApp" prompt left, native `<details>` accordion right |
-| 06 | Contact | cream | Filled WhatsApp button, a preview of the pre-filled message, Instagram link, footer |
+| 06 | Contact | cream | Filled WhatsApp button, a preview of the pre-filled message, Instagram and email links, a separate partnership line for agencies and studios (email with a preset subject), footer |
 
 Neighbouring sections use different backgrounds, so each one reads as a new chapter. If you add a section, update the menu, the `data-chapter` numbers and the `/06` in the side rail.
 
