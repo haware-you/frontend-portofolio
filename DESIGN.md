@@ -42,7 +42,7 @@ Decisions already made:
 | 02 | About | `#faf7f1` | Two columns: the customer's moment as the heading, who Hawaree is and what he does on the right. No photo. |
 | 02 | Stats | ink | Three Six Caps rows; the middle one is outlined |
 | 03 | Works | ink + per-panel colour | Horizontal pinned scroll, one panel per project |
-| 04 | Process | red-deep | Four steps: Talk, Design, Build, Launch. Called Process, not Services, because it describes how a project runs. |
+| 04 | Process | red-deep | Four steps: Talk, Design, Build, Launch. Talk names both channels: WhatsApp first, Instagram DM (@hawaree_yu) second. Called Process, not Services, because it describes how a project runs. |
 | 05 | FAQ | ink | Two columns: "Ask on WhatsApp" prompt left, native `<details>` accordion right |
 | 06 | Contact | cream | Filled WhatsApp button, a preview of the pre-filled message, Instagram link, footer |
 
