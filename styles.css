@@ -74,9 +74,12 @@ html.js .preloader { animation: preloader-failsafe 0s 8s forwards; }
 html:not(.js) .preloader,
 html:not(.js) .cursor,
 html:not(.js) .rail__burger { display: none; }
-/* Works can't scroll sideways without GSAP: stack the panels instead */
-html:not(.js) .works__track { flex-direction: column; width: auto; height: auto; }
-html:not(.js) .panel { height: 100vh; height: 100svh; }
+/* Works can't scroll sideways without GSAP, and on phones (script.js adds
+   .works-stacked at 820px and below) it scrolls down instead: stack the panels */
+html:not(.js) .works__track,
+html.works-stacked .works__track { flex-direction: column; width: auto; height: auto; }
+html:not(.js) .panel,
+html.works-stacked .panel { height: 100vh; height: 100svh; }
 
 /* ---------- Grain ---------- */
 .grain {

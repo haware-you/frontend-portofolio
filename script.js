@@ -15,6 +15,11 @@ const isTouch = window.matchMedia('(hover: none)').matches;
 const isMobile = window.matchMedia('(max-width: 820px)').matches;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* Phones: the Works panels stack and scroll down like the rest of the page.
+   The pinned sideways scroll is desktop only. */
+const horizontalWorks = !isMobile;
+if (!horizontalWorks) document.documentElement.classList.add('works-stacked');
+
 /* ---------- Smooth scrolling ---------- */
 const smoother = ScrollSmoother.create({
   wrapper: '#smooth-wrapper',
@@ -151,7 +156,7 @@ function getRailWidth() {
   return isMobile ? 0 : 64;
 }
 
-const worksTween = gsap.to(track, {
+const worksTween = horizontalWorks ? gsap.to(track, {
   x: () => -getScrollAmount(),
   ease: 'none',
   scrollTrigger: {
@@ -163,10 +168,10 @@ const worksTween = gsap.to(track, {
     invalidateOnRefresh: true,
     anticipatePin: 1,
   },
-});
+}) : null;
 
 /* Panel inner parallax driven by the horizontal tween */
-document.querySelectorAll('.panel').forEach((panel) => {
+if (horizontalWorks) document.querySelectorAll('.panel').forEach((panel) => {
   const media = panel.querySelector('.panel__media');
   if (!media) return; // the closing invitation panel has no image
 
@@ -192,11 +197,17 @@ document.querySelectorAll('.panel').forEach((panel) => {
    the WebGL uScroll uniform below). */
 if (isTouch && !reducedMotion) {
   document.querySelectorAll('.panel__media--site').forEach((media) => {
-    ScrollTrigger.create({
+    ScrollTrigger.create(horizontalWorks ? {
       trigger: media.closest('.panel'),
       containerAnimation: worksTween,
       start: 'left center',
       end: 'right center',
+      toggleClass: { targets: media, className: 'is-previewing' },
+    } : {
+      // stacked panels: play while the frame crosses the middle of the screen
+      trigger: media,
+      start: 'top 65%',
+      end: 'bottom 35%',
       toggleClass: { targets: media, className: 'is-previewing' },
     });
   });
@@ -206,7 +217,7 @@ if (isTouch && !reducedMotion) {
    so tabbing to a link would focus something invisible. Scroll the page to
    the vertical position where that panel is in view, and undo the browser's
    own focus-scroll of the clipped container. */
-document.querySelectorAll('.panel a').forEach((link) => {
+if (horizontalWorks) document.querySelectorAll('.panel a').forEach((link) => {
   link.addEventListener('focus', () => {
     worksSection.scrollLeft = 0;
     const st = worksTween.scrollTrigger;
@@ -260,12 +271,9 @@ function buildPanelSplits() {
       stagger: 0.03,
       duration: 0.8,
       ease: 'power4.out',
-      scrollTrigger: {
-        trigger: panel,
-        containerAnimation: worksTween,
-        start: 'left 65%',
-        once: true,
-      },
+      scrollTrigger: horizontalWorks
+        ? { trigger: panel, containerAnimation: worksTween, start: 'left 65%', once: true }
+        : { trigger: title, start: 'top 90%', once: true },
     });
   });
 }

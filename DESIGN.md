@@ -41,7 +41,7 @@ Decisions already made:
 | 01 | Hero | cream | Giant red HAWAREE, short intro |
 | 02 | About | `#faf7f1` | Two columns: the customer's moment as the heading, who Hawaree is and what he does on the right. No photo. |
 | 02 | Stats | ink | Three Six Caps rows; the middle one is outlined |
-| 03 | Works | ink + per-panel colour | Horizontal pinned scroll, one panel per project |
+| 03 | Works | ink + per-panel colour | Horizontal pinned scroll on desktop; at 820px and below the panels stack and scroll down (`.works-stacked`). One panel per project |
 | 04 | Process | red-deep | Four steps: Talk, Design, Build, Launch. Talk names both channels: WhatsApp first, Instagram DM (@hawaree_yu) second. Called Process, not Services, because it describes how a project runs. |
 | 05 | FAQ | ink | Two columns: "Ask on WhatsApp" prompt left, native `<details>` accordion right |
 | 06 | Contact | cream | Filled WhatsApp button, a preview of the pre-filled message, Instagram and email links, a separate partnership line for agencies and studios (email with a preset subject), footer |
