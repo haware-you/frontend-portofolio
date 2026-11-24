@@ -65,10 +65,15 @@ Neighbouring sections use different backgrounds, so each one reads as a new chap
 - **Write plainly.** Short sentences and active voice. Avoid filler like "worth noting".
 - **English on the site. Indonesian in the WhatsApp message template,** because that's what clients type in.
 - **Never invent proof.** No made-up client logos, "trusted by" grids, review stars, testimonials, or numbers like "1,000 companies".
-- **No prices, durations or revision counts** unless Hawaree has confirmed them. The FAQ answers say "it depends" and promise a price before work starts.
+- **Confirmed offer:** sites start from Rp 1.500.000 (a one-page menu site), and small changes (prices, menu items, photos) are free for two months after launch. These appear in the FAQ and on the last Works panel; change both if the offer changes.
+- **No other prices, durations or revision counts** unless Hawaree has confirmed them. The exact price is always promised before work starts.
 - **Spine sentence:** a customer picks up their phone, looks for one thing, and either messages you or leaves. Every section should serve that moment; if it doesn't, cut it or rewrite it.
 - **Job title: "UI designer & front-end developer".** Use it in the page title, link previews and the About intro. Don't use "UI/UX" until at least one case study shows real user research or testing (who used it, what they struggled with, what changed).
 - **Only claim services that are offered.** Don't claim "brand identity" work unless Hawaree actually does it. Facts on the page so far: clients in Jakarta, Depok and Kab. Tangerang (the stats row says "Greater Jakarta"), design and code by Hawaree. Magnis lists brand identity; keep that only if Hawaree made the Magnis logo and brand.
+
+## Link preview
+
+`img/og.jpg` (1200x630) is the image WhatsApp, Instagram and others show when the site link is shared. It is a centred card (HAWAREE, one line, job title), because WhatsApp often crops previews to a square from the middle. The meta tags point at `https://frontend-hawaree.vercel.app/`; update them if the domain changes, and remake the card if the name, title or area changes.
 
 ## WhatsApp CTA
 
