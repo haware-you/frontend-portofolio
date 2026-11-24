@@ -7,7 +7,7 @@ Portfolio of **Abdullah Shidqi Hawari** (Hawaree): websites designed and built b
 - **Editorial type system:** Anton, Six Caps and Playfair Display on a vermilion / cream / ink palette
 - **Preloader and intro:** counter, curtain reveal, character-by-character title animation
 - **Smooth scrolling:** GSAP ScrollSmoother with parallax
-- **Pinned horizontal "Works" section:** live client sites in a browser frame. Hovering (or keyboard focus) pans a full-page screenshot from top to bottom; clicking opens the real site. On touch devices the preview plays when the panel reaches the middle of the screen.
+- **"Works" section:** pinned horizontal scroll on desktop; on phones and small tablets (820px and below) the panels stack and scroll down. Live client sites in a browser frame. Hovering (or keyboard focus) pans a full-page screenshot from top to bottom; clicking opens the real site. On touch devices the preview plays when the panel reaches the middle of the screen.
 - **WebGL image distortion:** Three.js shader with hover ripple, scroll-velocity bend and chromatic shift
 - **Services as a process:** four steps (Talk, Design, Build, Launch), each with a short description
 - **FAQ:** native `<details>` accordion, no extra JavaScript beyond a scroll refresh when an answer opens

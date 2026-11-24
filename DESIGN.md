@@ -41,10 +41,10 @@ Decisions already made:
 | 01 | Hero | cream | Giant red HAWAREE, short intro |
 | 02 | About | `#faf7f1` | Two columns: the customer's moment as the heading, who Hawaree is and what he does on the right. No photo. |
 | 02 | Stats | ink | Three Six Caps rows; the middle one is outlined |
-| 03 | Works | ink + per-panel colour | Horizontal pinned scroll, one panel per project |
-| 04 | Process | red-deep | Four steps: Talk, Design, Build, Launch. Called Process, not Services, because it describes how a project runs. |
+| 03 | Works | ink + per-panel colour | Horizontal pinned scroll on desktop; at 820px and below the panels stack and scroll down (`.works-stacked`). One panel per project |
+| 04 | Process | red-deep | Four steps: Talk, Design, Build, Launch. Talk names both channels: WhatsApp first, Instagram DM (@hawaree_yu) second. Called Process, not Services, because it describes how a project runs. |
 | 05 | FAQ | ink | Two columns: "Ask on WhatsApp" prompt left, native `<details>` accordion right |
-| 06 | Contact | cream | Filled WhatsApp button, a preview of the pre-filled message, Instagram link, footer |
+| 06 | Contact | cream | Filled WhatsApp button, a preview of the pre-filled message, Instagram and email links, a separate partnership line for agencies and studios (email with a preset subject), footer |
 
 Neighbouring sections use different backgrounds, so each one reads as a new chapter. If you add a section, update the menu, the `data-chapter` numbers and the `/06` in the side rail.
 
@@ -52,6 +52,7 @@ Neighbouring sections use different backgrounds, so each one reads as a new chap
 
 - The last panel is an invitation, not a project: "Next: your site" with a WhatsApp button. No stock images.
 - Panel colours cycle **red, cream, ink, red**. Two panels next to each other never share a colour.
+- The browser bar shows "<Project> · live site", not the web address. The sites are on temporary vercel.app addresses, which read as practice work. The frame and "Visit site ↗" still link to the real site.
 - Each live project gets a browser frame with a **full-page screenshot**. It pans top to bottom on hover or keyboard focus, and on phones when the panel reaches the middle of the screen.
 - **Frame width:** up to 1.3x the original, `max(min(50vw, 820px), min(65vw, (100vh - 380px) * 1.6, 1066px))`.
 - **Frame height:** `fitSiteFrames()` in `script.js` stretches the frame down to **10px above the top of the title letters**. Keep that gap if you change the title size.
@@ -64,10 +65,15 @@ Neighbouring sections use different backgrounds, so each one reads as a new chap
 - **Write plainly.** Short sentences and active voice. Avoid filler like "worth noting".
 - **English on the site. Indonesian in the WhatsApp message template,** because that's what clients type in.
 - **Never invent proof.** No made-up client logos, "trusted by" grids, review stars, testimonials, or numbers like "1,000 companies".
-- **No prices, durations or revision counts** unless Hawaree has confirmed them. The FAQ answers say "it depends" and promise a price before work starts.
-- **Spine sentence:** a customer opens a phone, looks for one thing, and either messages you or leaves. Every section should serve that moment; if it doesn't, cut it or rewrite it.
+- **Confirmed offer:** sites start from Rp 1.500.000 (a one-page menu site), and small changes (prices, menu items, photos) are free for two months after launch. These appear in the FAQ and on the last Works panel; change both if the offer changes.
+- **No other prices, durations or revision counts** unless Hawaree has confirmed them. The exact price is always promised before work starts.
+- **Spine sentence:** a customer picks up their phone, looks for one thing, and either messages you or leaves. Every section should serve that moment; if it doesn't, cut it or rewrite it.
 - **Job title: "UI designer & front-end developer".** Use it in the page title, link previews and the About intro. Don't use "UI/UX" until at least one case study shows real user research or testing (who used it, what they struggled with, what changed).
-- **Only claim services that are offered.** Don't claim "brand identity" work unless Hawaree actually does it. Facts on the page so far: clients in Jakarta and Depok, design and code by Hawaree.
+- **Only claim services that are offered.** Don't claim "brand identity" work unless Hawaree actually does it. Facts on the page so far: clients in Jakarta, Depok and Kab. Tangerang (the stats row says "Greater Jakarta"), design and code by Hawaree. Magnis lists brand identity; keep that only if Hawaree made the Magnis logo and brand.
+
+## Link preview
+
+`img/og.jpg` (1200x630) is the image WhatsApp, Instagram and others show when the site link is shared. It is a centred card (HAWAREE, one line, job title), because WhatsApp often crops previews to a square from the middle. The meta tags point at `https://frontend-hawaree.vercel.app/`; update them if the domain changes, and remake the card if the name, title or area changes.
 
 ## WhatsApp CTA
 
@@ -109,11 +115,14 @@ These all broke at least once. Check them after any layout change.
 4. **Anything that changes page height must call `ScrollTrigger.refresh()`.** Opening an FAQ answer does this; without it, the smooth scroll can't reach the footer.
 5. **The WebGL canvas follows its frame with a `ResizeObserver`.** Keep that if frames are resized in code.
 6. **On touch screens, wrap hover colours in `@media (hover: hover)`**, so a tapped item doesn't stay highlighted.
+7. **The page must work without JavaScript or if the GSAP CDN fails.** `index.html` adds a `js` class to `<html>`, then loads `script.js` only if all four GSAP files loaded; otherwise it removes `js`. Styles under `html:not(.js)` hide the preloader, cursor and menu button and stack the Works panels vertically. A CSS failsafe hides the preloader after 8 seconds whatever happens. Anything new that JS hides or moves needs a `html:not(.js)` fallback.
+8. **The red scroll circle (`.hero__cue`) is hidden on phones**, because the floating WhatsApp button sits in that corner.
 
 ## Before you push a visual change
 
 - Check 390, 860, 1366x768, 1440x900 and 1920x1080.
 - No sideways scroll at any width.
 - Look at the result in **Safari** as well as Chrome. Most of the bugs above showed up only in Safari.
+- Load the page once with JavaScript turned off: no red curtain, every section and Works panel readable.
 - Open one FAQ answer and scroll to the footer.
 - Tap "Chat on WhatsApp" on a real phone after deploying.
