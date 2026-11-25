@@ -17,8 +17,13 @@ Portfolio of **Abdullah Shidqi Hawari** (Hawaree): websites designed and built b
 
 ## Adding a project
 
-1. Capture a full-page screenshot at 1440px wide and save it as `img/works/<name>-full.jpg` (aim for under ~300 KB).
-2. Copy one of the live-site `<article class="panel">` blocks in `index.html`, then update the link, the title, the caption and the image path.
+1. Capture a full-page screenshot at 1440px wide and save it as `img/works/<name>-full.jpg`. This is the fallback for browsers without WebP.
+2. Save a WebP copy next to it as `img/works/<name>-full.webp` (quality 75; for example `cwebp -q 75 in.jpg -o out.webp`, or Pillow with `quality=75, method=6`). This is the file most browsers load, and it is usually 30–50% smaller than the JPEG.
+3. Copy one of the live-site `<article class="panel">` blocks in `index.html`, then update the link, the title, the caption and both image paths in the `<picture>` element.
+
+## Link preview
+
+`img/og.jpg` (1200×630) is the image shown when the link is shared in WhatsApp, social apps and chat apps. The `og:image` tag needs a full URL, so if the site moves to another domain, update `og:url`, `og:image`, `twitter:image` and `canonical` in `index.html`.
 
 ## Stack
 

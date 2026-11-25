@@ -433,7 +433,8 @@ if (!isMobile && !isTouch && !reducedMotion && supportsWebGL && window.THREE) {
   class DistortImage {
     constructor(img) {
       this.img = img;
-      this.container = img.parentElement;
+      // a <picture> wrapper (WebP + JPEG fallback) has no box of its own
+      this.container = img.closest('picture')?.parentElement || img.parentElement;
       this.ready = false;
 
       this.scene = new THREE.Scene();
